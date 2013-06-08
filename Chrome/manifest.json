@@ -5,7 +5,8 @@
 	"minimum_chrome_version": "20.0",
 	"description": "Reddit Enhancement Suite - a group of enhancements for browsing Reddit",
 	"background": {
-		"scripts": ["background.js"]
+		"scripts": ["background.js",
+					"clipboard.js"]
 	},
 	"homepage_url": "http://redditenhancementsuite.com",
 	"content_scripts": [
@@ -59,6 +60,8 @@
 		"http://imgclean.com/*",
 		"http://gdata.youtube.com/*",
 		"http://backend.deviantart.com/oembed?url=*",
-		"http://api.tumblr.com/v2/blog/*/posts?api_key=*&id=*"
+		"http://api.tumblr.com/v2/blog/*/posts?api_key=*&id=*",
+		"clipboardRead",
+		"clipboardWrite"
 	]
 }
