@@ -1,7 +1,9 @@
 #  Script name:    makelinks.ps1 
 #  Created on:     2013.06.08 
 #  Author:         Mike Morain 
-#  Purpose:        Create hard links in Chrome directory for general 'lib' directory.
+#  Purpose:        Create copies in Chrome directory for general 'lib' directory.
+#				   Can't use hardlinks because the files end up being empty to build
+#				   an unloaded extension on Windows.
 
 
 
@@ -23,18 +25,18 @@ $fileEntries = Get-ChildItem $libPath -name;
 # Make hard-links for each 
 foreach($fileName in $fileEntries) 
 { 
-	$target = $libPath + $fileName;
-	$link = $chromePath + $fileName;
+	$source = $libPath + $fileName;
+	$target = $chromePath + $fileName;
     # [Console]::WriteLine($filename); 
     # [Console]::WriteLine($source); 
     # [Console]::WriteLine($target); 
 
     if($clean -eq $true) {
-		# remove hard-link
-		cmd /c del $link
+		# remove copy
+		cmd /c del $target
 	} else { 
-    	# create hardlink
-    	cmd /c mklink /H $link $target
+    	# create copy
+    	cmd /c copy /Y $source $target
     }
 }       
 
