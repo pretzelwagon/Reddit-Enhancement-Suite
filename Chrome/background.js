@@ -263,6 +263,22 @@ chrome.runtime.onMessage.addListener(
 						break;
 				}
 				break;
+            // pretzelwagon copy addition
+            case 'copyToClipboard':
+                var thisLinkURL = request.linkURL;
+                var thisLinkTitle = request.linkTitle;
+                if (thisLinkURL.toLowerCase().substring(0,4) != 'http') {
+                    (thisLinkURL.substring(0,1) == '/') ? thisLinkURL = 'http://www.reddit.com' + thisLinkURL : thisLinkURL = location.href + thisLinkURL;
+                }
+                var copyData;
+                if(thisLinkTitle != null)
+                {
+                    copyData = thisLinkTitle + ": " + thisLinkURL;
+                } else {
+                    copyData = thisLinkURL;
+                }
+                Clipboard.copy(copyData);
+                break;
 			default:
 				sendResponse({status: "unrecognized request type"});
 				break;
